@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keyword" content="compiano,infp artist,쌩모코딩,piano">
+    <meta name="author" content="ssengmo">
+    <meta property="og:description" content="악보를 볼 줄 몰라도 피아노를 칠 수 있게 해주는 사이트!">
+    
+
+    <title>compiano</title>
+<!-- Stop translate -->
+    <meta name="google" translate="notranslate">
+
+<!--google adsence-->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2707794556547056"
+     crossorigin="anonymous"></script>
+
+
+
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <style>
+    
+      @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+      body{
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        -ms-user-select:none;
+        user-select:none;
+        display:block;
+      
+      }
+      header{
+        height:8vh;
+        font-family: 'Do Hyeon', sans-serif;
+        font-size:3vh;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+      }
+      .name-wrapper{
+        font-size:2vh;
+        
+      }
+      header a{
+       text-decoration:none;
+       color:black;
+       
+      }
+      #infp_logo{
+        height:4vh;
+        width:4vh;
+        border-radius:2vh;
+      }
+      .maindiv{
+        font-family: 'Do Hyeon', sans-serif;
+        display:flex;
+        height:92vh;
+        flex-direction:column;
+        justify-content: space-between;
+      
+        background-color:#282828;
+      }
+      footer{
+        background-color:#dbdbdb;
+      }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+      #message{
+        font-size:10px;
+        font-color:gray;
+      }
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+      .piano-wrapper{
+        
+      }
+      .piano {
+        text-align: center;
+        margin-top: 0.5rem;
+        display: flex;
+        width: 100%;
+        overflow: hidden;
+        height: 200px;
+        pading:0;
+      }
+      .key {
+        display: inline-flex;
+        flex-grow: 1;
+        position: relative;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .key span {
+        align-items: flex-start;
+      }
+      .key > span {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-direction: column;
+      }
+      .key > span i {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-style: normal;
+        font-variant: normal;
+        margin-bottom: 12px;
+        width: 20px;
+      height: 20px;
+        border-radius: 10px;
+      }
+      .key .white-key {
+        background: #fff;
+        border-top: 1px solid rgba(32, 32, 32, 0.2);
+        border-right: 1px solid rgba(32, 32, 32, 0.3);
+        border-bottom: 1px solid rgba(32, 32, 32, 0.3);
+        border-radius: 0 0 5px 5px;
+        box-shadow: 0px 5px 1px rgba(32, 32, 32, 0.2);
+        margin: 0 -2px;
+        width: 100%;
+        height: 190px;
+        transition: background-color 0.05s ease, box-shadow 0.05s ease;
+      }
+      .key .white-key:active {
+        background: #D8D8D8;
+        position: relative;
+        top: 5px;
+        box-shadow: 0px 0px 0px rgba(32, 32, 32, 0);
+        transition: background-color 0.05s ease, box-shadow 0.05s ease;
+      }
+      .key .white-key :active .black-key {
+        top: -10px;
+      }
+      .key .white-key .marked {
+        background-color: #72ac51;
+        color: transparent;
+        box-shadow: inset -1px -3px 4px rgba(32, 32, 32, 0.3);
+      }
+      .key .black-key {
+        content: "";
+        box-shadow: inset 0px -1px 2px rgba(255, 255, 255, 0.4), 0 2px 3px rgba(0, 0, 0, 0.4);
+        background: -webkit-linear-gradient(-20deg, #222222, #000000, #222222);
+        background: -moz-linear-gradient(-20deg, #222222, #000000, #222222);
+        background: -o-linear-gradient(-20deg, #222222, #000000, #222222);
+        background: linear-gradient(-20deg, #222222, #000000, #222222);
+        background: #111;
+        transition: background-color 0.05s ease, box-shadow 0.05s ease;
+        box-shadow: 0px 5px 1px rgba(32, 32, 32, 0.2);
+        border-width: 1px;
+        border-radius: 0 0 5px 5px;
+        border-style: solid;
+        border-color: #666 #222 #111 #555;
+        height: 110px;
+        position: absolute;
+        top: 0px;
+        right: -40%;
+        width: 80%;
+        z-index: 10;
+      }
+      .key .black-key:active {
+        box-shadow: 0px 1px 1px rgba(32, 32, 32, 0.1);
+        border-bottom-width: 3px;
+        height: 110px;
+        top: 5px;
+      }
+      .key .black-key i {
+        display: block;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 0.8rem;
+        text-align: center;
+        position: relative;
+      }
+      .key .black-key i > span {
+        display: inline-flex;
+        flex-direction: row;
+        position: absolute;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+      }
+      .key .black-key i > span:first-child {
+        margin-top: -4px;
+      }
+      .key .black-key i > span:last-child {
+        padding-top: 10px;
+      }
+      .key .black-key .marked {
+        background-color: #72ac51;
+        color: transparent;
+        box-shadow: inset 3px 3px 4px rgba(255, 255, 255, 0.3);
+      }
+      /* Removing left/right line. First and Last key */
+      .key:first-child .white-key {
+        border-left: none;
+        border-radius: 0 0 5px 0;
+      }
+      .key:last-child .white-key {
+        border-right: transparent;
+        border-radius: 0 0 0 5px;
+      }
+      .key:first-child .white-key:active,
+      .key:last-child .white-key:active {
+        box-shadow: 0px 0px 0px rgba(32, 32, 32, 0);
+      }
+      #treble{
+        filter :brightness(0) invert(1);
+        height:20vh;
+      }
+      .sheet-wrapper{
+        display:flex;
+        justify-content:center;
+        align-items:center:
+      }
+      .word-wrapper{
+        width:60vw;
+        border-top:3px solid white;
+        border-bottom:3px solid white;
+        color:white;
+        font-size:8vh;
+        text-align:center;
+        line-height : 20vh;
+      }
+      #box{
+        border:1px solid white;
+      }
+          </style>
+          <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-217833776-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-217833776-1');
+      </script>
+      
+    
+    
+  </head>
+  <body>
+  <header>
+    <div class="logo-wrapper px-4">
+      <a href='https://www.tiktok.com/@infp_artist'>
+      <img id='infp_logo' src='/piano/infp_artist.jpeg' /></a> <span> COMPIANO </span> 
+    </div>
+    
+    <div id='message'></div>
+    <div class="name-wrapper px-4">
+      <span>by</span>
+      <a href='/'>
+      <span>쌩모코딩</span></a>  
+    </div>
+
+  </header>
+    <main>
+    <div class='maindiv'>
+    <div class="option p-3">
+      <!--<button type="button" id='btn_lang' class="btn btn-light" onclick='toggleChangeLang()'>한글</button>-->
+      
+      <button type="button" id='btn_allkey' class="btn btn-light" onclick='toggleAllkey()'>모든 키</button>
+      <button type="button" id='btn_fullscreen' class="btn btn-light" onclick='toggleFullScreen()'>전체화면</button>
+    </div>
+    
+    <!--
+  <div class='sheet-wrapper'>
+    <img id='treble' src='./piano/treble.png'/>
+    
+      <div class='word-wrapper'>
+      <span id='passed_word'>ㅤ</span>
+      <span id='box'>ㅌ</span>
+      <span>ㅇ</span>
+      <span>ㅗ</span>
+      <span>ㅌ</span>
+      <span>ㅇ</span>
+      <span>ㅗ</span>
+      <span>ㅌ</span>
+      <span>ㅇ</span>
+      <span>ㅡ</span>
+      <span>ㅌ</span>
+      </div>
+    
+  </div>-->
+  
+  
+ <div class='advertisement'></div>
+ 
+ 
+ <div class='piano-wrapper'>
+     <ul class="piano p-0">
+         <li class="key">
+             <span class="white-key" data-note="c3" onmousedown='playNote(c3)'><i>ㅂ</i></span>
+             <span class="black-key" data-note="db3" onmousedown='playNote(db3)'><i>2</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="d3" onmousedown='playNote(d3)'><i>ㅈ</i></span>
+             <span class="black-key" data-note="eb3"  onmousedown='playNote(eb3)'><i>3</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="e3" onmousedown='playNote(e3)'><i>ㄷ</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="f3" onmousedown='playNote(f3)'><i>ㄱ</i></span>
+             <span class="black-key" data-note="gb3" onmousedown='playNote(gb3)'><i>5</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="g3" onmousedown='playNote(g3)'><i>ㅅ</i></span>
+             <span class="black-key" data-note="ab3"  onmousedown='playNote(ab3)'><i>6</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="a3" onmousedown='playNote(a3)'><i>ㅛ</i></span>
+             <span class="black-key" data-note="bb3"  onmousedown='playNote(bb3)'><i>7</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="b3" onmousedown='playNote(b3)'><i>ㅕ</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="c4" onmousedown='playNote(c4)'><i>ㅑ</i></span>
+             <span class="black-key" data-note="db4" onmousedown='playNote(db4)'><i>9</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="d4" onmousedown='playNote(d4)'><i>ㅐ</i></span>
+             <span class="black-key" data-note="eb4" onmousedown='playNote(eb4)'><i>0</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="e4" onmousedown='playNote(e4)'><i>ㅔ</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="f4" onmousedown='playNote(f4)'><i>ㅋ</i></span>
+             <span class="black-key" data-note="gb4" onmousedown='playNote(gb4)'><i>ㄴ</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="g4" onmousedown='playNote(g4)'><i>ㅌ</i></span>
+             <span class="black-key" data-note="ab4" onmousedown='playNote(ab4)'><i>ㅇ</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="a4" onmousedown='playNote(a4)'><i>ㅊ</i></span>
+             <span class="black-key" data-note="bb4" onmousedown='playNote(bb4)'><i>ㄹ</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="b4" onmousedown='playNote(b4)'><i>ㅍ</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="c5" onmousedown='playNote(c5)'><i>ㅠ</i></span>
+             <span class="black-key" data-note="db5" onmousedown='playNote(db5)'><i>ㅗ</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="d5" onmousedown='playNote(d5)'><i>ㅜ</i></span>
+             <span class="black-key" data-note="eb5" onmousedown='playNote(eb5)'><i>ㅓ</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="e5" onmousedown='playNote(e5)'><i>ㅡ</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="f5" onmousedown='playNote(f5)'><i>,</i></span>
+             <span class="black-key" data-note="gb5" onmousedown='playNote(gb5)'><i>ㅣ</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="g5" onmousedown='playNote(g5)'><i>.</i></span>
+             <span class="black-key" data-note="ab5" onmousedown='playNote(ab5)'><i>;</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key" data-note="a5" onmousedown='playNote(a5)'><i>/</i></span>
+             <span class="black-key" data-note="bb5" onmousedown='playNote(bb5)'><i>'</i></span>
+         </li>
+         <li class="key">
+             <span class="white-key"   data-note="b5" onmousedown='playNote(b5)'><i></i></span>
+         </li>
+     </ul>
+ </div>
+ </div>
+ <audio id="a0">
+    <source src="piano/piano_notes/piano-mp3_A0.mp3" type="audio/mp3">
+ </audio>
+ <audio id="a1">
+    <source src="piano/piano_notes/piano-mp3_A1.mp3" type="audio/mp3">
+ </audio>
+ <audio id="a2">
+    <source src="piano/piano_notes/piano-mp3_A2.mp3" type="audio/mp3">
+ </audio>
+ <audio id="a3">
+    <source src="piano/piano_notes/piano-mp3_A3.mp3" type="audio/mp3">
+ </audio>
+ <audio id="a4">
+    <source src="piano/piano_notes/piano-mp3_A4.mp3" type="audio/mp3">
+ </audio>
+ <audio id="a5">
+    <source src="piano/piano_notes/piano-mp3_A5.mp3" type="audio/mp3">
+ </audio>
+ <audio id="a6">
+    <source src="piano/piano_notes/piano-mp3_A6.mp3" type="audio/mp3">
+ </audio>
+ <audio id="a7">
+    <source src="piano/piano_notes/piano-mp3_A7.mp3" type="audio/mp3">
+ </audio>
+ 
+ <audio id="ab1">
+    <source src="piano/piano_notes/piano-mp3_Ab1.mp3" type="audio/mp3">
+ </audio>
+ <audio id="ab2">
+    <source src="piano/piano_notes/piano-mp3_Ab2.mp3" type="audio/mp3">
+ </audio>
+ <audio id="ab3">
+    <source src="piano/piano_notes/piano-mp3_Ab3.mp3" type="audio/mp3">
+ </audio>
+ <audio id="ab4">
+    <source src="piano/piano_notes/piano-mp3_Ab4.mp3" type="audio/mp3">
+ </audio>
+ <audio id="ab5">
+    <source src="piano/piano_notes/piano-mp3_Ab5.mp3" type="audio/mp3">
+ </audio>
+ <audio id="ab6">
+    <source src="piano/piano_notes/piano-mp3_Ab6.mp3" type="audio/mp3">
+ </audio>
+ <audio id="ab7">
+    <source src="piano/piano_notes/piano-mp3_Ab7.mp3" type="audio/mp3">
+ </audio>
+ 
+  <audio id="b0">
+    <source src="piano/piano_notes/piano-mp3_B0.mp3" type="audio/mp3">
+ </audio>
+ <audio id="b1">
+    <source src="piano/piano_notes/piano-mp3_B1.mp3" type="audio/mp3">
+ </audio>
+ <audio id="b2">
+    <source src="piano/piano_notes/piano-mp3_B2.mp3" type="audio/mp3">
+ </audio>
+ <audio id="b3">
+    <source src="piano/piano_notes/piano-mp3_B3.mp3" type="audio/mp3">
+ </audio>
+ <audio id="b4">
+    <source src="piano/piano_notes/piano-mp3_B4.mp3" type="audio/mp3">
+ </audio>
+ <audio id="b5">
+    <source src="piano/piano_notes/piano-mp3_B5.mp3" type="audio/mp3">
+ </audio>
+ <audio id="b6">
+    <source src="piano/piano_notes/piano-mp3_B6.mp3" type="audio/mp3">
+ </audio>
+ <audio id="b7">
+    <source src="piano/piano_notes/piano-mp3_B7.mp3" type="audio/mp3">
+ </audio>
+ 
+ <audio id="bb0">
+    <source src="piano/piano_notes/piano-mp3_Bb0.mp3" type="audio/mp3">
+ </audio> 
+ <audio id="bb1">
+    <source src="piano/piano_notes/piano-mp3_Bb1.mp3" type="audio/mp3">
+ </audio>
+ <audio id="bb2">
+    <source src="piano/piano_notes/piano-mp3_Bb2.mp3" type="audio/mp3">
+ </audio>
+ <audio id="bb3">
+    <source src="piano/piano_notes/piano-mp3_Bb3.mp3" type="audio/mp3">
+ </audio>
+ <audio id="bb4">
+    <source src="piano/piano_notes/piano-mp3_Bb4.mp3" type="audio/mp3">
+ </audio>
+ <audio id="bb5">
+    <source src="piano/piano_notes/piano-mp3_Bb5.mp3" type="audio/mp3">
+ </audio>
+ <audio id="bb6">
+    <source src="piano/piano_notes/piano-mp3_Bb6.mp3" type="audio/mp3">
+ </audio>
+ <audio id="bb7">
+    <source src="piano/piano_notes/piano-mp3_Bb7.mp3" type="audio/mp3">
+ </audio>
+ 
+ <audio id="c1">
+    <source src="piano/piano_notes/piano-mp3_C1.mp3" type="audio/mp3">
+ </audio>
+ <audio id="c2">
+    <source src="piano/piano_notes/piano-mp3_C2.mp3" type="audio/mp3">
+ </audio>
+ <audio id="c3">
+    <source src="piano/piano_notes/piano-mp3_C3.mp3" type="audio/mp3">
+ </audio>
+ <audio id="c4">
+    <source src="piano/piano_notes/piano-mp3_C4.mp3" type="audio/mp3">
+ </audio>
+ <audio id="c5">
+    <source src="piano/piano_notes/piano-mp3_C5.mp3" type="audio/mp3">
+ </audio>
+ <audio id="c6">
+    <source src="piano/piano_notes/piano-mp3_C6.mp3" type="audio/mp3">
+ </audio>
+ <audio id="c7">
+    <source src="piano/piano_notes/piano-mp3_C7.mp3" type="audio/mp3">
+ </audio>
+  <audio id="c8">
+    <source src="piano/piano_notes/piano-mp3_C8.mp3" type="audio/mp3">
+ </audio>
+ 
+
+ <audio id="d1">
+    <source src="piano/piano_notes/piano-mp3_D1.mp3" type="audio/mp3">
+ </audio>
+ <audio id="d2">
+    <source src="piano/piano_notes/piano-mp3_D2.mp3" type="audio/mp3">
+ </audio>
+ <audio id="d3">
+    <source src="piano/piano_notes/piano-mp3_D3.mp3" type="audio/mp3">
+ </audio>
+ <audio id="d4">
+    <source src="piano/piano_notes/piano-mp3_D4.mp3" type="audio/mp3">
+ </audio>
+ <audio id="d5">
+    <source src="piano/piano_notes/piano-mp3_D5.mp3" type="audio/mp3">
+ </audio>
+ <audio id="d6">
+    <source src="piano/piano_notes/piano-mp3_D6.mp3" type="audio/mp3">
+ </audio>
+ <audio id="d7">
+    <source src="piano/piano_notes/piano-mp3_D7.mp3" type="audio/mp3">
+ </audio>
+ 
+ <audio id="db1">
+    <source src="piano/piano_notes/piano-mp3_Db1.mp3" type="audio/mp3">
+ </audio>
+ <audio id="db2">
+    <source src="piano/piano_notes/piano-mp3_Db2.mp3" type="audio/mp3">
+ </audio>
+ <audio id="db3">
+    <source src="piano/piano_notes/piano-mp3_Db3.mp3" type="audio/mp3">
+ </audio>
+ <audio id="db4">
+    <source src="piano/piano_notes/piano-mp3_Db4.mp3" type="audio/mp3">
+ </audio>
+ <audio id="db5">
+    <source src="piano/piano_notes/piano-mp3_Db5.mp3" type="audio/mp3">
+ </audio>
+ <audio id="db6">
+    <source src="piano/piano_notes/piano-mp3_Db6.mp3" type="audio/mp3">
+ </audio>
+ <audio id="db7">
+    <source src="piano/piano_notes/piano-mp3_Db7.mp3" type="audio/mp3">
+ </audio>
+  <audio id="db8">
+    <source src="piano/piano_notes/piano-mp3_Db8.mp3" type="audio/mp3">
+ </audio>
+ 
+ <audio id="e1">
+    <source src="piano/piano_notes/piano-mp3_E1.mp3" type="audio/mp3">
+ </audio>
+ <audio id="e2">
+    <source src="piano/piano_notes/piano-mp3_E2.mp3" type="audio/mp3">
+ </audio>
+ <audio id="e3">
+    <source src="piano/piano_notes/piano-mp3_E3.mp3" type="audio/mp3">
+ </audio>
+ <audio id="e4">
+    <source src="piano/piano_notes/piano-mp3_E4.mp3" type="audio/mp3">
+ </audio>
+ <audio id="e5">
+    <source src="piano/piano_notes/piano-mp3_E5.mp3" type="audio/mp3">
+ </audio>
+ <audio id="e6">
+    <source src="piano/piano_notes/piano-mp3_E6.mp3" type="audio/mp3">
+ </audio>
+ <audio id="e7">
+    <source src="piano/piano_notes/piano-mp3_E7.mp3" type="audio/mp3">
+ </audio>
+
+ <audio id="eb1">
+    <source src="piano/piano_notes/piano-mp3_Eb1.mp3" type="audio/mp3">
+ </audio>
+ <audio id="eb2">
+    <source src="piano/piano_notes/piano-mp3_Eb2.mp3" type="audio/mp3">
+ </audio>
+ <audio id="eb3">
+    <source src="piano/piano_notes/piano-mp3_Eb3.mp3" type="audio/mp3">
+ </audio>
+ <audio id="eb4">
+    <source src="piano/piano_notes/piano-mp3_Eb4.mp3" type="audio/mp3">
+ </audio>
+ <audio id="eb5">
+    <source src="piano/piano_notes/piano-mp3_Eb5.mp3" type="audio/mp3">
+ </audio>
+ <audio id="eb6">
+    <source src="piano/piano_notes/piano-mp3_Eb6.mp3" type="audio/mp3">
+ </audio>
+ <audio id="eb7">
+    <source src="piano/piano_notes/piano-mp3_Eb7.mp3" type="audio/mp3">
+ </audio>
+
+ <audio id="f1">
+    <source src="piano/piano_notes/piano-mp3_F1.mp3" type="audio/mp3">
+ </audio>
+ <audio id="f2">
+    <source src="piano/piano_notes/piano-mp3_F2.mp3" type="audio/mp3">
+ </audio>
+ <audio id="f3">
+    <source src="piano/piano_notes/piano-mp3_F3.mp3" type="audio/mp3">
+ </audio>
+ <audio id="f4">
+    <source src="piano/piano_notes/piano-mp3_F4.mp3" type="audio/mp3">
+ </audio>
+ <audio id="f5">
+    <source src="piano/piano_notes/piano-mp3_F5.mp3" type="audio/mp3">
+ </audio>
+ <audio id="f6">
+    <source src="piano/piano_notes/piano-mp3_F6.mp3" type="audio/mp3">
+ </audio>
+ <audio id="f7">
+    <source src="piano/piano_notes/piano-mp3_F7.mp3" type="audio/mp3">
+ </audio>
+
+ <audio id="g1">
+    <source src="piano/piano_notes/piano-mp3_G1.mp3" type="audio/mp3">
+ </audio>
+ <audio id="g2">
+    <source src="piano/piano_notes/piano-mp3_G2.mp3" type="audio/mp3">
+ </audio>
+ <audio id="g3">
+    <source src="piano/piano_notes/piano-mp3_G3.mp3" type="audio/mp3">
+ </audio>
+ <audio id="g4">
+    <source src="piano/piano_notes/piano-mp3_G4.mp3" type="audio/mp3">
+ </audio>
+ <audio id="g5">
+    <source src="piano/piano_notes/piano-mp3_G5.mp3" type="audio/mp3">
+ </audio>
+ <audio id="g6">
+    <source src="piano/piano_notes/piano-mp3_G6.mp3" type="audio/mp3">
+ </audio>
+ <audio id="g7">
+    <source src="piano/piano_notes/piano-mp3_G7.mp3" type="audio/mp3">
+ </audio> 
+  
+ <audio id="gb1">
+    <source src="piano/piano_notes/piano-mp3_Gb1.mp3" type="audio/mp3">
+ </audio>
+ <audio id="gb2">
+    <source src="piano/piano_notes/piano-mp3_Gb2.mp3" type="audio/mp3">
+ </audio>
+ <audio id="gb3">
+    <source src="piano/piano_notes/piano-mp3_Gb3.mp3" type="audio/mp3">
+ </audio>
+ <audio id="gb4">
+    <source src="piano/piano_notes/piano-mp3_Gb4.mp3" type="audio/mp3">
+ </audio>
+ <audio id="gb5">
+    <source src="piano/piano_notes/piano-mp3_Gb5.mp3" type="audio/mp3">
+ </audio>
+ <audio id="gb6">
+    <source src="piano/piano_notes/piano-mp3_Gb6.mp3" type="audio/mp3">
+ </audio>
+ <audio id="gb7">
+    <source src="piano/piano_notes/piano-mp3_Gb7.mp3" type="audio/mp3">
+ </audio>
+
+    </main>
+    
+<footer class="text-muted py-5">
+
+<ins class="kakao_ad_area" style="display:none;" 
+ data-ad-unit    = "DAN-M9L2S3Cd3wxCxr93" 
+ data-ad-width   = "320" 
+ data-ad-height  = "100"></ins> 
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+
+  <div class="container">
+    <p class="float-end mb-1">
+      <a href="#">Back to top</a>
+    </p>
+    <p class="mb-2">Written with © Bootstrap</p>
+    <p class="mb-0">개발 공부중 이라 사이트에 대한 피드백 한번씩 부탁드립니다. 댓글, 메일 모두 기다리고 있습니다!</p> <a href="mailto:kavinking@naver.com" rel="nofollow noopener noreferrer">kavinking@naver.com</a>
+  </div>
+  
+  
+</footer>
+
+    <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+      
+  
+
+<script src="piano/piano.js"></script>
+</body>
+</html>

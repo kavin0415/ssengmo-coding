@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+  <meta property="og:title" content="JustBubble">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="ssangmo.com/thumbnail/bubble.png">
+  <meta property="og:description" content="그냥 물거품이다 마치 우리의 인생처럼">
+    <title>bubble!</title>
+    <link href="/bubble/bubble.css" rel="stylesheet" type="text/css" media="all">
+    <style>
+    *{
+      margin:0;
+      padding:0;
+    }
+      body{
+       background:#408cff; 
+       
+      overscroll-behavior-y: none;
+
+      }
+      .kakao_ad_area{
+        position:fixed;
+        bottom:0;
+      }
+      .not_scroll{position:fixed;overflow:hidden;width:100%;height:100%}
+    </style>
+  </head>
+  <body>
+  <canvas class="not_scroll" id="canvas"></canvas>
+  <footer>
+    <ins class="kakao_ad_area" style="display:none;" 
+ data-ad-unit    = "DAN-38optiHJMAtJELue" 
+ data-ad-width   = "320" 
+ data-ad-height  = "50"></ins> 
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+    <script src="bubble/bubble.js"></script>
+    </footer>
+  </body>
+</html>
